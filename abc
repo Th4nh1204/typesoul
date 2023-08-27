@@ -34,7 +34,6 @@ btns:Button(
     "Speed 100",
     function()
             game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 100
-            end
 end)
 -- MISC
 
