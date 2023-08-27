@@ -1,0 +1,154 @@
+local DiscordLib =
+    loadstring(game:HttpGet "https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/discord")()
+
+local win = DiscordLib:Window("T1m Hub")
+
+local serv = win:Server("Type://Soul", "")
+
+local btns = serv:Channel("Main")
+
+btns:Button(
+    "No Fog",
+    function()
+        game:GetService("Lighting").Sky:Destroy()
+        game:GetService("Lighting").RaidLighting.Sky:Destroy()
+    end
+)
+
+btns:Button(
+    "Anti AFK",
+    function()
+local bb=game:service'VirtualUser'
+game:service'Players'.LocalPlayer.Idled:connect(function()
+bb:CaptureController()bb:ClickButton2(Vector2.new())
+wait(2)
+
+        end)
+    end
+)
+
+
+-- AUTO FARM
+
+btns:Button(
+    "Speed 100",
+    function()
+        while true do
+            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 100
+            wait(0.1)
+            end
+end)
+-- MISC
+
+
+-- WALKSPEED
+
+
+btns:Button(
+    "Player Esp",
+    function()
+        local function createBillboard(entity)
+
+
+    local billboardGui = Instance.new("BillboardGui")
+    billboardGui.Name = "BillboardGui"
+    billboardGui.AlwaysOnTop = true
+    billboardGui.Size = UDim2.new(1, 0, 1, 0)
+    billboardGui.StudsOffset = Vector3.new(0, 5, 0)
+    billboardGui.Adornee = entity
+    
+    local frame = Instance.new("Frame")
+    frame.Size = UDim2.new(5.5, 0, 5.5, 0) -- Adjust the values to make the circle bigger
+    frame.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+    frame.BackgroundTransparency = 0.5
+    frame.BorderSizePixel = 0
+    frame.ClipsDescendants = true
+    frame.Parent = billboardGui
+    
+    
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0.5, 0)
+    corner.Parent = frame
+    
+    billboardGui.Parent = entity
+end
+
+local function checkEntities()
+    local entities = game:GetService("Workspace").Entities:GetDescendants()
+    
+    for _, entity in ipairs(entities) do
+        if entity:IsA("Model") then
+            local characterHandler = entity:FindFirstChild("CharacterHandler")
+            
+            if characterHandler then
+                createBillboard(entity)
+            end
+        end
+    end
+end
+
+game:GetService("Players").PlayerAdded:Connect(function(player)
+    player.CharacterAdded:Connect(function(character)
+        wait(5) -- Delay to ensure the character is fully loaded
+        checkEntities()
+    end)
+end)
+    end
+)
+
+
+
+
+btns:Button(
+    "Adjuchar ESP",
+    function()
+    local function createBillboard(entity)
+    
+    
+    local billboardGui = Instance.new("BillboardGui")
+    billboardGui.Name = "BillboardGui"
+    billboardGui.AlwaysOnTop = true
+    billboardGui.Size = UDim2.new(0, 5.5, 0, 5.5)
+    billboardGui.StudsOffset = Vector3.new(0, 10, 0)
+    billboardGui.Adornee = entity
+
+    local frame = Instance.new("Frame")
+    frame.Size = UDim2.new(1, 0, 1, 0)
+    frame.BackgroundColor3 = Color3.new(0, 1, 0) -- Green color
+    frame.BackgroundTransparency = 0.5
+    frame.BorderSizePixel = 0
+    frame.ClipsDescendants = true
+    frame.Parent = billboardGui
+
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0.5, 0)
+    corner.Parent = frame
+
+    billboardGui.Parent = entity
+end
+
+local function checkEntities()
+    local entities = game:GetService("Workspace").Entities:GetDescendants()
+    
+    for _, entity in ipairs(entities) do
+        if entity:IsA("Model") then
+            local jackalHair = entity:FindFirstChild("JackalHair")
+            local animateAdjuchas = entity:FindFirstChild("AnimateAdjuchas")
+            
+            if jackalHair or animateAdjuchas then
+                createBillboard(entity)
+            end
+        end
+    end
+end
+print("TESTING")
+game:GetService("Players").PlayerAdded:Connect(function(player)
+    player.CharacterAdded:Connect(function(character)
+        wait(5) -- Delay to ensure the character is fully loaded
+        checkEntities()
+    end)
+end)
+    end
+)
+
+btns:Seperator()
