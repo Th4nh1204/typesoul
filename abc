@@ -25,12 +25,13 @@ local Tab = Window:MakeTab({
 Tab:AddButton({
 	Name = "Esp Players",
 	Callback = function()
+        while wait(2) do
         local function createBillboard(entity)
 
             local billboardGui = Instance.new("BillboardGui")
             billboardGui.Name = "BillboardGui"
             billboardGui.AlwaysOnTop = true
-            billboardGui.Size = UDim2.new(1, 0, 1, 0)
+            billboardGui.Size = UDim2.new(3, 3, 3, 0)
             billboardGui.StudsOffset = Vector3.new(0, 5, 0)
             billboardGui.Adornee = entity
             
@@ -61,20 +62,22 @@ Tab:AddButton({
                     end
                 end
             end
-        end        
+        end
+    end        
     
 })
 
 Tab:AddButton({
 	Name = "Esp Fishbone",
 	Callback = function()
+        while wait(2) do
         local function createBillboard(entity)
     
     
             local billboardGui = Instance.new("BillboardGui")
             billboardGui.Name = "BillboardGui"
             billboardGui.AlwaysOnTop = true
-            billboardGui.Size = UDim2.new(0, 5.5, 0, 5.5)
+            billboardGui.Size = UDim2.new(3, 3, 3, 0)
             billboardGui.StudsOffset = Vector3.new(0, 10, 0)
             billboardGui.Adornee = entity
         
@@ -104,20 +107,22 @@ Tab:AddButton({
                     end
                 end
             end
-        end                
+        end
+    end                
     
 })
 
 Tab:AddButton({
 	Name = "Esp Menos",
 	Callback = function()
+        while wait(2) do
         local function createBillboard(entity)
     
     
             local billboardGui = Instance.new("BillboardGui")
             billboardGui.Name = "BillboardGui"
             billboardGui.AlwaysOnTop = true
-            billboardGui.Size = UDim2.new(0, 5.5, 0, 5.5)
+            billboardGui.Size = UDim2.new(3, 3, 3, 0)
             billboardGui.StudsOffset = Vector3.new(0, 10, 0)
             billboardGui.Adornee = entity
         
@@ -147,26 +152,28 @@ Tab:AddButton({
                     end
                 end
             end        
-        end        
+        end
+    end        
     
 })
 
 Tab:AddButton({
 	Name = "Esp Adjuchas",
 	Callback = function()
+        while wait(2) do
         local function createBillboard(entity)
     
     
             local billboardGui = Instance.new("BillboardGui")
             billboardGui.Name = "BillboardGui"
             billboardGui.AlwaysOnTop = true
-            billboardGui.Size = UDim2.new(0, 5.5, 0, 5.5)
+            billboardGui.Size = UDim2.new(3, 3, 3, 0)
             billboardGui.StudsOffset = Vector3.new(0, 10, 0)
             billboardGui.Adornee = entity
         
             local frame = Instance.new("Frame")
             frame.Size = UDim2.new(1, 0, 1, 0)
-            frame.BackgroundColor3 = Color3.new(110, 153, 202) -- Blue color
+            frame.BackgroundColor3 = Color3.new(255, 255, 255) -- Blue color
             frame.BackgroundTransparency = 0.5
             frame.BorderSizePixel = 0
             frame.ClipsDescendants = true
@@ -190,7 +197,8 @@ Tab:AddButton({
                     end
                 end
             end        
-        end        
+        end
+    end        
     
 })
 
