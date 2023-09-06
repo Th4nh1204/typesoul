@@ -203,7 +203,7 @@ local Main = Window:MakeTab({
 Main:AddSlider({
 	Name = "Walk Speed",
 	Min = 0,
-	Max = 350,
+	Max = 200,
 	Default = 20,
 	Color = Color3.fromRGB(255,255,255),
 	Increment = 1,
@@ -211,6 +211,33 @@ Main:AddSlider({
 	Callback = function(Value)
 		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
 	end    
+})
+
+Main:AddToggle({
+	Name = "Walk Speed Toggle | Default 150 Speed",
+	Default = false,
+	Callback = function(Value)
+        getgenv().speed = Value
+        if getgenv().speed == true then
+            while wait(0.1) do
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 150
+            end
+	end
+end 
+})
+
+Main:AddToggle({
+	Name = "Turn OFF Walk Speed Toggle",
+	Default = false,
+	Callback = function(Value)
+        getgenv().speed2 = Value
+        if getgenv().speed2 == true then
+            getgenv().speed = false
+            while wait(0.1) do
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 15
+            end
+	end
+end 
 })
 
 Main:AddButton({
