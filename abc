@@ -22,51 +22,6 @@ local Tab = Window:MakeTab({
 	PremiumOnly = false
 })
 
-Tab:AddButton({
-	Name = "Esp Players",
-	Callback = function()
-        while wait(2) do
-        local function createBillboard(entity)
-
-            local billboardGui = Instance.new("BillboardGui")
-            billboardGui.Name = "BillboardGui"
-            billboardGui.AlwaysOnTop = true
-            billboardGui.Size = UDim2.new(3, 3, 3, 0)
-            billboardGui.StudsOffset = Vector3.new(0, 5, 0)
-            billboardGui.Adornee = entity
-            
-            local frame = Instance.new("Frame")
-            frame.Size = UDim2.new(1, 0, 1, 0) 
-            frame.BackgroundColor3 = Color3.fromRGB(196, 40, 28) -- red
-            frame.BackgroundTransparency = 0.5
-            frame.BorderSizePixel = 0
-            frame.ClipsDescendants = true
-            frame.Parent = billboardGui
-            
-            
-            local corner = Instance.new("UICorner")
-            corner.CornerRadius = UDim.new(0.5, 0)
-            corner.Parent = frame
-            
-            billboardGui.Parent = entity
-        end
-        
-            local entities = game:GetService("Workspace").Entities:GetDescendants()
-            
-            for _, entity in ipairs(entities) do
-                if entity:IsA("Model") then
-                    local characterHandler = entity:FindFirstChild("CharacterHandler")
-                    
-                    if characterHandler then
-                        createBillboard(entity)
-                    end
-                end
-            end
-        end
-    end        
-})
-
-
 Tab:AddToggle({
     Name = "ESP Player",
     Default = false,
