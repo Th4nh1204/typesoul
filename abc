@@ -64,142 +64,241 @@ Tab:AddButton({
             end
         end
     end        
-    
 })
 
-Tab:AddButton({
-	Name = "Esp Fishbone",
-	Callback = function()
-        while wait(2) do
-        local function createBillboard(entity)
-    
-    
-            local billboardGui = Instance.new("BillboardGui")
-            billboardGui.Name = "BillboardGui"
-            billboardGui.AlwaysOnTop = true
-            billboardGui.Size = UDim2.new(3, 3, 3, 0)
-            billboardGui.StudsOffset = Vector3.new(0, 10, 0)
-            billboardGui.Adornee = entity
-        
-            local frame = Instance.new("Frame")
-            frame.Size = UDim2.new(1, 0, 1, 0)
-            frame.BackgroundColor3 = Color3.new(161, 165, 162) -- Grey color
-            frame.BackgroundTransparency = 0.5
-            frame.BorderSizePixel = 0
-            frame.ClipsDescendants = true
-            frame.Parent = billboardGui
-        
-            local corner = Instance.new("UICorner")
-            corner.CornerRadius = UDim.new(0.5, 0)
-            corner.Parent = frame
-        
-            billboardGui.Parent = entity
-        end
-            local entities = game:GetService("Workspace").Entities:GetDescendants()
-            
+
+Tab:AddToggle({
+    Name = "ESP Player",
+    Default = false,
+    Callback = function(On)
+        if On then
+            while wait(0.1) do
+            local function createBillboard(entity)
+                local billboardGui = entity:FindFirstChild("BillboardGui")
+                if not billboardGui then
+                    billboardGui = Instance.new("BillboardGui")
+                    billboardGui.Name = "BillboardGui"
+                    billboardGui.AlwaysOnTop = true
+                    billboardGui.Size = UDim2.new(3, 3, 3, 0)
+                    billboardGui.StudsOffset = Vector3.new(0, 5, 0)
+                    billboardGui.Adornee = entity
+
+                    local frame = Instance.new("Frame")
+                    frame.Size = UDim2.new(1, 0, 1, 0) 
+                    frame.BackgroundColor3 = Color3.fromRGB(196, 40, 28) -- red
+                    frame.BackgroundTransparency = 0.5
+                    frame.BorderSizePixel = 0
+                    frame.ClipsDescendants = true
+                    frame.Parent = billboardGui
+
+                    local corner = Instance.new("UICorner")
+                    corner.CornerRadius = UDim.new(0.5, 0)
+                    corner.Parent = frame
+
+                    billboardGui.Parent = entity
+                end
+            end
+
+            local workspace = game:GetService("Workspace")
+            local entities = workspace.Entities:GetDescendants()
+
             for _, entity in ipairs(entities) do
                 if entity:IsA("Model") then
-                    local jackalHair = entity:FindFirstChild("JackalHair")
-                    local animateFishbone = entity:FindFirstChild("AnimateFishbone")
-                    
-                    if jackalHair or animateFishbone then
+                    local characterHandler = entity:FindFirstChild("CharacterHandler")
+
+                    if characterHandler then
                         createBillboard(entity)
                     end
                 end
             end
         end
-    end                
-    
+        else
+            local workspace = game:GetService("Workspace")
+            local entities = workspace.Entities:GetChildren()
+
+            for _, entity in ipairs(entities) do
+                local billboardGui = entity:FindFirstChild("BillboardGui")
+
+                if billboardGui then
+                    billboardGui:Destroy()
+                end
+            end
+        end
+    end
 })
 
-Tab:AddButton({
-	Name = "Esp Menos",
-	Callback = function()
-        while wait(2) do
-        local function createBillboard(entity)
-    
-    
-            local billboardGui = Instance.new("BillboardGui")
-            billboardGui.Name = "BillboardGui"
-            billboardGui.AlwaysOnTop = true
-            billboardGui.Size = UDim2.new(3, 3, 3, 0)
-            billboardGui.StudsOffset = Vector3.new(0, 10, 0)
-            billboardGui.Adornee = entity
-        
-            local frame = Instance.new("Frame")
-            frame.Size = UDim2.new(1, 0, 1, 0)
-            frame.BackgroundColor3 = Color3.new(196, 40, 28) -- Black color
-            frame.BackgroundTransparency = 0.5
-            frame.BorderSizePixel = 0
-            frame.ClipsDescendants = true
-            frame.Parent = billboardGui
-        
-            local corner = Instance.new("UICorner")
-            corner.CornerRadius = UDim.new(0.5, 0)
-            corner.Parent = frame
-        
-            billboardGui.Parent = entity
-        end
-            local entities = game:GetService("Workspace").Entities:GetDescendants()
-            
-            for _, entity in ipairs(entities) do
-                if entity:IsA("Model") then
-                    local jackalHair = entity:FindFirstChild("JackalHair")
-                    local animateMenos = entity:FindFirstChild("AnimateMenos")
-                    
-                    if jackalHair or animateMenos then
-                        createBillboard(entity)
+Tab:AddToggle({
+    Name = "ESP Fishbone",
+    Default = false,
+    Callback = function(On2)
+        if On2 then
+            while wait(0.1) do
+                local function createBillboard(entity)
+                local billboardGui = entity:FindFirstChild("BillboardGui")
+                if not billboardGui then
+                    local billboardGui = Instance.new("BillboardGui")
+                    billboardGui.Name = "BillboardGui"
+                    billboardGui.AlwaysOnTop = true
+                    billboardGui.Size = UDim2.new(3, 3, 3, 0)
+                    billboardGui.StudsOffset = Vector3.new(0, 10, 0)
+                    billboardGui.Adornee = entity
+                
+                    local frame = Instance.new("Frame")
+                    frame.Size = UDim2.new(1, 0, 1, 0)
+                    frame.BackgroundColor3 = Color3.new(161, 165, 162) -- Grey color
+                    frame.BackgroundTransparency = 0.5
+                    frame.BorderSizePixel = 0
+                    frame.ClipsDescendants = true
+                    frame.Parent = billboardGui
+                
+                    local corner = Instance.new("UICorner")
+                    corner.CornerRadius = UDim.new(0.5, 0)
+                    corner.Parent = frame
+                
+                    billboardGui.Parent = entity
+                end
+                end
+                    local entities = game:GetService("Workspace").Entities:GetDescendants()
+                    for _, entity in ipairs(entities) do
+                        if entity:IsA("Model") then
+                            local jackalHair = entity:FindFirstChild("JackalHair")
+                            local animateFishbone = entity:FindFirstChild("AnimateFishbone")
+                            
+                            if jackalHair or animateFishbone then
+                                createBillboard(entity)
                     end
                 end
-            end        
+            end  
         end
-    end        
-    
+    else
+        local workspace = game:GetService("Workspace")
+        local entities = workspace.Entities:GetChildren()
+
+        for _, entity in ipairs(entities) do
+            local billboardGui = entity:FindFirstChild("BillboardGui")
+
+            if billboardGui then
+                billboardGui:Destroy()
+            end
+        end
+    end
+end
 })
 
-Tab:AddButton({
-	Name = "Esp Adjuchas",
-	Callback = function()
-        while wait(2) do
-        local function createBillboard(entity)
-    
-    
-            local billboardGui = Instance.new("BillboardGui")
-            billboardGui.Name = "BillboardGui"
-            billboardGui.AlwaysOnTop = true
-            billboardGui.Size = UDim2.new(3, 3, 3, 0)
-            billboardGui.StudsOffset = Vector3.new(0, 10, 0)
-            billboardGui.Adornee = entity
-        
-            local frame = Instance.new("Frame")
-            frame.Size = UDim2.new(1, 0, 1, 0)
-            frame.BackgroundColor3 = Color3.new(255, 255, 255) -- Blue color
-            frame.BackgroundTransparency = 0.5
-            frame.BorderSizePixel = 0
-            frame.ClipsDescendants = true
-            frame.Parent = billboardGui
-        
-            local corner = Instance.new("UICorner")
-            corner.CornerRadius = UDim.new(0.5, 0)
-            corner.Parent = frame
-        
-            billboardGui.Parent = entity
-        end
-            local entities = game:GetService("Workspace").Entities:GetDescendants()
-            
-            for _, entity in ipairs(entities) do
-                if entity:IsA("Model") then
-                    local jackalHair = entity:FindFirstChild("JackalHair")
-                    local animateAdjuchas = entity:FindFirstChild("AnimateAdjuchas")
-                    
-                    if jackalHair or animateAdjuchas then
-                        createBillboard(entity)
+Tab:AddToggle({
+    Name = "ESP Menos",
+    Default = false,
+    Callback = function(On2)
+        if On2 then
+            while wait(0.1) do
+                local function createBillboard(entity)
+                local billboardGui = entity:FindFirstChild("BillboardGui")
+                if not billboardGui then
+                    local billboardGui = Instance.new("BillboardGui")
+                    billboardGui.Name = "BillboardGui"
+                    billboardGui.AlwaysOnTop = true
+                    billboardGui.Size = UDim2.new(3, 3, 3, 0)
+                    billboardGui.StudsOffset = Vector3.new(0, 10, 0)
+                    billboardGui.Adornee = entity
+                
+                    local frame = Instance.new("Frame")
+                    frame.Size = UDim2.new(1, 0, 1, 0)
+                    frame.BackgroundColor3 = Color3.new(161, 165, 162) -- Grey color
+                    frame.BackgroundTransparency = 0.5
+                    frame.BorderSizePixel = 0
+                    frame.ClipsDescendants = true
+                    frame.Parent = billboardGui
+                
+                    local corner = Instance.new("UICorner")
+                    corner.CornerRadius = UDim.new(0.5, 0)
+                    corner.Parent = frame
+                
+                    billboardGui.Parent = entity
+                end
+                end
+                    local entities = game:GetService("Workspace").Entities:GetDescendants()
+                    for _, entity in ipairs(entities) do
+                        if entity:IsA("Model") then
+                            local jackalHair = entity:FindFirstChild("JackalHair")
+                            local animateFishbone = entity:FindFirstChild("AnimateMenos")
+                            
+                            if jackalHair or animateFishbone then
+                                createBillboard(entity)
                     end
                 end
-            end        
+            end  
         end
-    end        
-    
+    else
+        local workspace = game:GetService("Workspace")
+        local entities = workspace.Entities:GetChildren()
+
+        for _, entity in ipairs(entities) do
+            local billboardGui = entity:FindFirstChild("BillboardGui")
+
+            if billboardGui then
+                billboardGui:Destroy()
+            end
+        end
+    end
+end
+})
+
+Tab:AddToggle({
+    Name = "ESP Adjuchas",
+    Default = false,
+    Callback = function(On2)
+        if On2 then
+            while wait(0.1) do
+                local function createBillboard(entity)
+                local billboardGui = entity:FindFirstChild("BillboardGui")
+                if not billboardGui then
+                    local billboardGui = Instance.new("BillboardGui")
+                    billboardGui.Name = "BillboardGui"
+                    billboardGui.AlwaysOnTop = true
+                    billboardGui.Size = UDim2.new(3, 3, 3, 0)
+                    billboardGui.StudsOffset = Vector3.new(0, 10, 0)
+                    billboardGui.Adornee = entity
+                
+                    local frame = Instance.new("Frame")
+                    frame.Size = UDim2.new(1, 0, 1, 0)
+                    frame.BackgroundColor3 = Color3.new(161, 165, 162) -- Grey color
+                    frame.BackgroundTransparency = 0.5
+                    frame.BorderSizePixel = 0
+                    frame.ClipsDescendants = true
+                    frame.Parent = billboardGui
+                
+                    local corner = Instance.new("UICorner")
+                    corner.CornerRadius = UDim.new(0.5, 0)
+                    corner.Parent = frame
+                
+                    billboardGui.Parent = entity
+                end
+                end
+                    local entities = game:GetService("Workspace").Entities:GetDescendants()
+                    for _, entity in ipairs(entities) do
+                        if entity:IsA("Model") then
+                            local jackalHair = entity:FindFirstChild("JackalHair")
+                            local animateFishbone = entity:FindFirstChild("AnimateAdjuchas")
+                            
+                            if jackalHair or animateFishbone then
+                                createBillboard(entity)
+                    end
+                end
+            end  
+        end
+    else
+        local workspace = game:GetService("Workspace")
+        local entities = workspace.Entities:GetChildren()
+
+        for _, entity in ipairs(entities) do
+            local billboardGui = entity:FindFirstChild("BillboardGui")
+
+            if billboardGui then
+                billboardGui:Destroy()
+            end
+        end
+    end
+end
 })
 
 local Main = Window:MakeTab({
