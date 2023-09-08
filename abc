@@ -310,7 +310,7 @@ Main:AddButton({
 })
 
 Main:AddButton({
-	Name = "FlySpeed (Press RightControl | Default 200 Speed)",
+	Name = "FlySpeed (Press LeftControl | Default 200 Speed)",
 	Callback = function()
         _G.flyspeed = 200
         _G.on = false
