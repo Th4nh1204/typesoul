@@ -321,7 +321,7 @@ Main:AddButton({
         local root = game.Players.LocalPlayer.Character.PrimaryPart
         
         UserInputService.InputBegan:Connect(function(inputObject, processed)
-            if inputObject.KeyCode == Enum.KeyCode.RightControl then
+            if inputObject.KeyCode == Enum.KeyCode.LeftControl then
                 _G.on = not _G.on
             end
         end)
