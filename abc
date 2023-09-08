@@ -333,4 +333,4 @@ Main:AddButton({
         end)
   	end    
 })
-print("tim tim tim")
+print("tim1 tim2 tim3")
