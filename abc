@@ -310,7 +310,7 @@ Main:AddButton({
 })
 
 Main:AddButton({
-	Name = "FlySpeed (Press LeftControl | Default 200 Speed)",
+	Name = "FlySpeed (Press ` | Default 200 Speed)",
 	Callback = function()
         _G.flyspeed = 200
         _G.on = false
@@ -321,7 +321,7 @@ Main:AddButton({
         local root = game.Players.LocalPlayer.Character.PrimaryPart
         
         UserInputService.InputBegan:Connect(function(inputObject, processed)
-            if inputObject.KeyCode == Enum.KeyCode.LeftControl then
+            if inputObject.KeyCode == Enum.KeyCode.Backquote then
                 _G.on = not _G.on
             end
         end)
