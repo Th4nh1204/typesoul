@@ -309,11 +309,9 @@ Main:AddButton({
     end       
 })
 
-Main:AddButton({
-	Name = "FlySpeed (Press ` | Default 200 Speed)",
-	Callback = function()
-        _G.flyspeed = 200
-        _G.on = false
+Main:AddLabel("FlySpeed (Press ` | Default 200 Speed)")
+_G.flyspeed = 200
+_G.on = false
         
         local UserInputService = game:GetService("UserInputService")
         local RunService = game:GetService("RunService")
@@ -331,6 +329,3 @@ Main:AddButton({
                 root.Velocity = root.CFrame.LookVector * _G.flyspeed
             end
         end)
-  	end    
-})
-print("tim1 tim2 tim3")
