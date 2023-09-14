@@ -276,13 +276,13 @@ Main:AddSlider({
 })
 
 Main:AddToggle({
-	Name = "Walk Speed Toggle | Default 150 Speed",
+	Name = "Walk Speed",
 	Default = false,
 	Callback = function(Value)
         getgenv().speed = Value
         if getgenv().speed == true then
             while wait(0.1) do
-		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 150
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 100
             end
 	end
 end 
