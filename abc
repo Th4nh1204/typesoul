@@ -62,6 +62,14 @@ Tab:AddToggle({
 end
 })
 
+spawn(function()
+	while wait(2) do
+		if ESPPlayer then
+			UpdatePlayerChams()
+		end
+	end
+end)
+
 Tab:AddToggle({
     Name = "ESP Fishbone",
     Default = false,
