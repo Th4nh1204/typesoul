@@ -1,85 +1,65 @@
+function isnil(thing)
+	return (thing == nil)
+end
+local function round(n)
+	return math.floor(tonumber(n) + 0.5)
+end
+Number = math.random(1, 1000000)
+
+function UpdatePlayerChams()
+	for i,v in pairs(game:GetService'Players':GetChildren()) do
+		pcall(function()
+			if not isnil(v.Character) then
+				if ESPPlayer then
+					if not isnil(v.Character.Head) and not v.Character.Head:FindFirstChild('NameEsp'..Number) then
+						local bill = Instance.new('BillboardGui',v.Character.Head)
+						bill.Name = 'NameEsp'..Number
+						bill.ExtentsOffset = Vector3.new(0, 1, 0)
+						bill.Size = UDim2.new(1,200,1,30)
+						bill.Adornee = v.Character.Head
+						bill.AlwaysOnTop = true
+						local name = Instance.new('TextLabel',bill)
+						name.Font = Enum.Font.GothamSemibold
+						name.FontSize = "Size14"
+						name.TextWrapped = true
+						name.Text = (v.Name ..' \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Character.Head.Position).Magnitude/3) ..' M')
+						name.Size = UDim2.new(1,0,1,0)
+						name.TextYAlignment = 'Top'
+						name.BackgroundTransparency = 1
+						name.TextStrokeTransparency = 0.5
+						if v.Team == game.Players.LocalPlayer.Team then
+							name.TextColor3 = Color3.fromRGB(205, 84, 75)
+						else
+							name.TextColor3 = Color3.fromRGB(123, 182, 232)
+						end
+					else
+						v.Character.Head['NameEsp'..Number].TextLabel.Text = (v.Name ..' | '.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Character.Head.Position).Magnitude/3) ..' M\nHealth : ' .. round(v.Character.Humanoid.Health*100/v.Character.Humanoid.MaxHealth) .. '%')
+					end
+				else
+					if v.Character.Head:FindFirstChild('NameEsp'..Number) then
+						v.Character.Head:FindFirstChild('NameEsp'..Number):Destroy()
+					end
+				end
+			end
+		end)
+	end
+end
+
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 local Window = OrionLib:MakeWindow({Name = "TOI CUT TAY BAN CUNG THE", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
-
-spawn(function()
-    game:GetService("RunService").Stepped:Connect(function()
-        if getgenv().Obby then
-            for _, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
-                if v:IsA("BasePart") then
-                    v.CanCollide = false    
-                end
-                if v:IsA("Humanoid") then
-                    v:ChangeState(11) 
-                end
-            end
-        end
-    end)
-end)
 
 local Tab = Window:MakeTab({
 	Name = "Esp",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
-
 Tab:AddToggle({
     Name = "ESP Player",
     Default = false,
-    Callback = function(On)
-        if On then
-            while wait(0.1) do
-            local function createBillboard(entity)
-                local billboardGui = entity:FindFirstChild("BillboardGui")
-                if not billboardGui then
-                    billboardGui = Instance.new("BillboardGui")
-                    billboardGui.Name = "BillboardGui"
-                    billboardGui.AlwaysOnTop = true
-                    billboardGui.Size = UDim2.new(3, 3, 3, 0)
-                    billboardGui.StudsOffset = Vector3.new(0, 5, 0)
-                    billboardGui.Adornee = entity
-
-                    local frame = Instance.new("Frame")
-                    frame.Size = UDim2.new(1, 0, 1, 0) 
-                    frame.BackgroundColor3 = Color3.fromRGB(196, 40, 28) -- red
-                    frame.BackgroundTransparency = 0.5
-                    frame.BorderSizePixel = 0
-                    frame.ClipsDescendants = true
-                    frame.Parent = billboardGui
-
-                    local corner = Instance.new("UICorner")
-                    corner.CornerRadius = UDim.new(0.5, 0)
-                    corner.Parent = frame
-
-                    billboardGui.Parent = entity
-                end
-            end
-
-            local workspace = game:GetService("Workspace")
-            local entities = workspace.Entities:GetDescendants()
-
-            for _, entity in ipairs(entities) do
-                if entity:IsA("Model") then
-                    local characterHandler = entity:FindFirstChild("CharacterHandler")
-
-                    if characterHandler then
-                        createBillboard(entity)
-                    end
-                end
-            end
-        end
-        else
-            local workspace = game:GetService("Workspace")
-            local entities = workspace.Entities:GetChildren()
-
-            for _, entity in ipairs(entities) do
-                local billboardGui = entity:FindFirstChild("BillboardGui")
-
-                if billboardGui then
-                    billboardGui:Destroy()
-                end
-            end
-        end
-    end
+    Callback = function(a)
+	ESPPlayer = a
+	UpdatePlayerChams()
+end
 })
 
 Tab:AddToggle({
@@ -170,7 +150,7 @@ Tab:AddToggle({
                 
                     billboardGui.Parent = entity
                 end
-                end
+            end
                     local entities = game:GetService("Workspace").Entities:GetDescendants()
                     for _, entity in ipairs(entities) do
                         if entity:IsA("Model") then
@@ -262,19 +242,6 @@ local Main = Window:MakeTab({
 	PremiumOnly = false
 })
 
-Main:AddSlider({
-	Name = "Walk Speed",
-	Min = 0,
-	Max = 200,
-	Default = 20,
-	Color = Color3.fromRGB(255,255,255),
-	Increment = 1,
-	ValueName = "Speed",
-	Callback = function(Value)
-		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
-	end    
-})
-
 Main:AddToggle({
 	Name = "Walk Speed",
 	Default = false,
@@ -282,21 +249,7 @@ Main:AddToggle({
         getgenv().speed = Value
         if getgenv().speed == true then
             while wait(0.1) do
-		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 100
-            end
-	end
-end 
-})
-
-Main:AddToggle({
-	Name = "Turn OFF Walk Speed Toggle",
-	Default = false,
-	Callback = function(Value)
-        getgenv().speed2 = Value
-        if getgenv().speed2 == true then
-            getgenv().speed = false
-            while wait(0.1) do
-		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 15
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 150
             end
 	end
 end 
