@@ -44,7 +44,23 @@ function UpdatePlayerChams()
 		end)
 	end
 end
-
+--tween
+local TweenService = game:GetService("TweenService")
+--noclip
+spawn(function()
+    game:GetService("RunService").Stepped:Connect(function()
+        if getgenv().noclip then
+            for _, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
+                if v:IsA("BasePart") then
+                    v.CanCollide = false    
+                end
+                if v:IsA("Humanoid") then
+                    v:ChangeState(11) 
+                end
+            end
+        end
+    end)
+end)
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 local Window = OrionLib:MakeWindow({Name = "TOI CUT TAY BAN CUNG THE", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
 
@@ -270,25 +286,17 @@ Main:AddButton({
     end       
 })
 
-Main:AddButton({
-	Name = "Teleport To Fragment Partial Res",
-	Callback = function()
-        local TweenService = game:GetService("TweenService")  
-	TweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(5, Enum.EasingStyle.Linear, Enum.EasingDirection.Out,0,false,0), 
-  {CFrame = CFrame.new(-127.93711853027344, 13971.9853515625, 477.01727294921875)}):Play()
-  NoClip = true
-					if NoClip == true then
-						local LocalPlayerCharacter = game.Players.LocalPlayer.Character
-						LocalPlayerCharacter.Head.CanCollide = false
-						LocalPlayerCharacter.LowerTorso.CanCollide = false
-						LocalPlayerCharacter.UpperTorso.CanCollide = false
-						LocalPlayerCharacter.HumanoidRootPart.CanCollide = false
-						if LocalPlayerCharacter:FindFirstChild("Badge") then
-							LocalPlayerCharacter.Badge.CanCollide = false
-						end
-					end
-    end       
-})
+Main:AddToggle({
+    Name = "Infinite Jump",
+    Default = false,
+    Callback = function(value)
+    getgenv().infjump = value
+    game:GetService("UserInputService").JumpRequest:connect(function()
+    if getgenv().infjump then
+        game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
+    end
+    end)
+end})
 
 Main:AddLabel("FlySpeed (Press ` | Default 200 Speed)")
 _G.flyspeed = 200
