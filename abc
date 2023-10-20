@@ -270,6 +270,26 @@ Main:AddButton({
     end       
 })
 
+Main:AddButton({
+	Name = "Teleport To Fragment Partial Res",
+	Callback = function()
+        local TweenService = game:GetService("TweenService")  
+	TweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(5, Enum.EasingStyle.Linear, Enum.EasingDirection.Out,0,false,0), 
+  {CFrame = CFrame.new(-127.93711853027344, 13971.9853515625, 477.01727294921875)}):Play()
+  NoClip = true
+					if NoClip == true then
+						local LocalPlayerCharacter = game.Players.LocalPlayer.Character
+						LocalPlayerCharacter.Head.CanCollide = false
+						LocalPlayerCharacter.LowerTorso.CanCollide = false
+						LocalPlayerCharacter.UpperTorso.CanCollide = false
+						LocalPlayerCharacter.HumanoidRootPart.CanCollide = false
+						if LocalPlayerCharacter:FindFirstChild("Badge") then
+							LocalPlayerCharacter.Badge.CanCollide = false
+						end
+					end
+    end       
+})
+
 Main:AddLabel("FlySpeed (Press ` | Default 200 Speed)")
 _G.flyspeed = 200
 _G.on = false
