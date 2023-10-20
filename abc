@@ -281,8 +281,19 @@ end
 
 Main:AddButton({
 	Name = "Teleport To Harribel NPC",
-	Callback = function()
-        game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(game:GetService("Workspace").NPCs.PartialRes.PartialRes.HumanoidRootPart.CFrame)
+	Callback = function(abc1)
+        getgenv().noclip = abc1
+			 TweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(15, Enum.EasingStyle.Linear, Enum.EasingDirection.Out,0,false,0), 
+		{CFrame = game:GetService("Workspace").NPCs.PartialRes.PartialRes.HumanoidRootPart.CFrame}):Play()
+    end       
+})
+
+Main:AddButton({
+	Name = "Teleport To Partial Res",
+	Callback = function(abc2)
+        getgenv().noclip = abc2   
+			 TweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(15, Enum.EasingStyle.Linear, Enum.EasingDirection.Out,0,false,0), 
+		{CFrame = game:GetService("Workspace").PartialRes.PartialResObby.PartialObject.CFrame}):Play()
     end       
 })
 
