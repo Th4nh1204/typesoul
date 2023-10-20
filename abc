@@ -292,7 +292,7 @@ Main:AddButton({
 	Name = "Teleport To Partial Res",
 	Callback = function(abc2)
         getgenv().noclip = abc2   
-			 TweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(15, Enum.EasingStyle.Linear, Enum.EasingDirection.Out,0,false,0), 
+			 TweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(3, Enum.EasingStyle.Linear, Enum.EasingDirection.Out,0,false,0), 
 		{CFrame = game:GetService("Workspace").PartialRes.PartialResObby.PartialObject.CFrame}):Play()
     end       
 })
